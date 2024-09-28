@@ -1,0 +1,241 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #ffffff;
+            margin-top: 80px;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section label {
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        .section input,
+        .section select {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .section button {
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .section button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-select {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .select-items {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            z-index: 99;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .select-items div {
+            color: black;
+            padding: 8px 16px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .select-items div:hover {
+            background-color: #ddd;
+        }
+
+        .select-selected {
+            background-color: #fff;
+            color: #555;
+        }
+
+        .select-selected.active {
+            border-color: #007BFF;
+        }
+
+        .selected-item {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Admin Dashboard
+    </div>
+    <div class="dashboard-container">
+        <section class="section placement-criteria">
+            <h3>Enter Placement Criteria</h3>
+            <form id="criteriaForm">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
+
+                <label for="cgpaEligibility">CGPA Eligibility:</label>
+                <input type="text" id="cgpaEligibility" name="cgpaEligibility" placeholder="Enter CGPA eligibility" required>
+
+                <label for="departments">Departments Allowed:</label>
+                <div class="custom-select" id="departmentsSelect">
+                    <div class="select-selected">Select departments</div>
+                    <div class="select-items">
+                        <div data-value="Computer Science">Computer Science</div>
+                        <div data-value="Information Technology">Information Technology</div>
+                        <div data-value="Electronics">Electronics</div>
+                        <div data-value="Electrical">Electrical</div>
+                        <div data-value="Mechanical">Mechanical</div>
+                        <div data-value="Civil">Civil</div>
+                    </div>
+                </div>
+
+                <label for="arrearsAllowed">History of Arrears Allowed:</label>
+                <select id="arrearsAllowed" name="arrearsAllowed" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+
+                <button type="submit">Submit Criteria</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selected = document.querySelector('.select-selected');
+            var items = document.querySelector('.select-items');
+            var options = items.querySelectorAll('div');
+
+            selected.addEventListener('click', function() {
+                items.style.display = items.style.display === 'block' ? 'none' : 'block';
+                selected.classList.toggle('active');
+            });
+
+            options.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('selected-item');
+                    updateSelectedOptions();
+                });
+            });
+
+            function updateSelectedOptions() {
+                var selectedOptions = [];
+                options.forEach(function(option) {
+                    if (option.classList.contains('selected-item')) {
+                        selectedOptions.push(option.getAttribute('data-value'));
+                    }
+                });
+
+                selected.textContent = selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Select departments';
+                selected.setAttribute('data-selected-options', selectedOptions.join(', '));
+            }
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.matches('.select-selected') && !e.target.matches('.select-items div')) {
+                    items.style.display = 'none';
+                    selected.classList.remove('active');
+                }
+            });
+
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var selectedDepartments = selected.getAttribute('data-selected-options');
+                if (!selectedDepartments) {
+                    alert('Please select at least one department.');
+                    return;
+                }
+
+                console.log('Company Name:', document.querySelector('#companyName').value);
+                console.log('CGPA Eligibility:', document.querySelector('#cgpaEligibility').value);
+                console.log('Departments Allowed:', selectedDepartments);
+                console.log('History of Arrears Allowed:', document.querySelector('#arrearsAllowed').value);
+
+                alert('Criteria submitted successfully!');
+            });
+        });
+    </script>
+</body>
+</html>

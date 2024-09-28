@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #ffffff;
+            margin-top: 80px;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+
+        .section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section label {
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        .section input,
+        .section select {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .section button {
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .section button:hover {
+            background-color: #0056b3;
+        }
+
+        .conditional-fields {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Student Dashboard
+    </div>
+    <div class="dashboard-container">
+        <section class="section personal-details">
+            <h3>Update Current Semester Details</h3>
+            <form id="detailsForm">
+                <label for="semester">Semester:</label>
+                <select id="semester" name="semester">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+
+                <label for="careers">No. of Arrears:</label>
+                <select id="careers" name="careers">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+
+                <div class="conditional-fields" id="gpaCgpaFields">
+                    <label for="gpa">GPA:</label>
+                    <input type="text" id="gpa" name="gpa" placeholder="Enter your GPA">
+
+                    <label for="cgpa">CGPA:</label>
+                    <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA">
+                </div>
+
+                <button type="submit">Update Details</button>
+            </form>
+        </section>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const careersSelect = document.getElementById('careers');
+            const gpaCgpaFields = document.getElementById('gpaCgpaFields');
+
+            function toggleFields() {
+                const numberOfCareers = parseInt(careersSelect.value, 10);
+                if (numberOfCareers === 0) {
+                    gpaCgpaFields.style.display = 'block';
+                } else {
+                    gpaCgpaFields.style.display = 'none';
+                }
+            }
+
+            toggleFields();
+
+            careersSelect.addEventListener('change', toggleFields);
+        });
+    </script>
+</body>
+</html>

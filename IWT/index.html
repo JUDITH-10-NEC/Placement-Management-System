@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .nav-buttons {
+            display: flex;
+        }
+
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-left: 10px;
+            background-color: #f8f9fa;
+            color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 1px solid #007BFF;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #007BFF;
+            color: #ffffff;
+        }
+
+        .image-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            border-top: 1px solid #ddd;
+        }
+
+        .contact-section h2 {
+            margin: 0;
+            font-size: 28px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            margin: 5px 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+
+        .contact-section .contact-details {
+            font-style: italic;
+        }
+
+        .contact-section a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        .contact-section a:hover {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Placement Filtration System</h1>
+        <div class="nav-buttons">
+            <a href="admin-login.html">Admin Login</a>
+            <a href="student-login.html">Student Login</a>
+        </div>
+    </div>
+    <div class="image-section">
+        <img src="image.png" alt="Image">
+    </div>
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p class="contact-details">The Principal,<br>
+        National Engineering College, (Autonomous)<br>
+        K.R.Nagar, Kovilpatti,<br>
+        Thoothukudi (Dt) - 628503</p>
+        <p>Email: <a href="mailto:principal@nec.edu.in">principal@nec.edu.in</a></p>
+    </div>
+</body>
+</html>
